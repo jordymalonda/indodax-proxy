@@ -69,26 +69,22 @@ class CoinController extends Controller
                 'pair' => $request->pair,
                 'type' => $request->type,
                 'price' => $request->price,
-                'idr' => $request->idr,
                 'symbol' => $request->symbol,
                 'amount' => $request->amount,
             ],
             [
-                'method' => 'required',
                 'pair' => 'required',
-                'type' => 'required',
                 'price' => 'required',
             ]
         );
 
         if (!$validator->fails()) {
             $data = [
-                'method' => $request->method,
+                'method' => 'trade',
                 'nonce' => time(),
                 'pair' => $request->pair,
-                'type' => $request->type,
+                'type' => 'sell',
                 'price' => $request->price,
-                'idr' => $request->idr,
                 $request->symbol => $request->amount,
             ];
     
@@ -163,7 +159,7 @@ class CoinController extends Controller
         if (!$validator->fails()) {
 
             $data = [
-                'method' => $request->method,
+                'method' => 'openOrders',
                 'nonce' => time(),
                 'pair' => $request->pair,
             ];
